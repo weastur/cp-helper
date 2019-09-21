@@ -2,6 +2,8 @@
 
 import argparse
 
+from codeforces.parser import parse
+
 
 class Platform:
     CODEFORCES = 'codeforces'
@@ -24,6 +26,8 @@ def main():
         type=int,
     )
     args = parser.parse_args()
+    if args.platform == Platform.CODEFORCES:
+        print(parse(args.contest))
 
 
 if __name__ == '__main__':
