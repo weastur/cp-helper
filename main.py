@@ -3,6 +3,11 @@
 import argparse
 
 from codeforces.parser import parse
+from utils.generators import (
+    generate_folder_structure,
+    generate_test_files,
+    copy_code_templates,
+)
 
 
 class Platform:
@@ -27,7 +32,10 @@ def main():
     )
     args = parser.parse_args()
     if args.platform == Platform.CODEFORCES:
-        print(parse(args.contest))
+        problems = parse(args.contest)
+    generate_folder_structure(args.contest, problems)
+    generate_test_files(args.contest, problems)
+    copy_code_templates(args.platform, args.contest, problems)
 
 
 if __name__ == '__main__':
