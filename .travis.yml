@@ -5,8 +5,12 @@ python:
     - "3.7"
     - "3.7-dev"
     - "3.8-dev"
+before_install:
+    - sudo apt update
+    - sudo apt install -y shellcheck
 install:
     - pip install pipenv
     - pipenv sync --dev
 script:
     - flake8
+    - find . -type f -name '*.sh' | xargs shellcheck
