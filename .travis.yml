@@ -1,16 +1,19 @@
 language: python
 dist: bionic
 python:
-    - "3.6"
-    - "3.7"
-    - "3.7-dev"
-    - "3.8-dev"
+- '3.6'
+- '3.7'
+- 3.7-dev
+- 3.8-dev
 before_install:
-    - sudo apt update
-    - sudo apt install -y shellcheck
+- sudo apt update
+- sudo apt install -y shellcheck
 install:
-    - pip install pipenv
-    - pipenv sync --dev
+- pip install pipenv
+- pipenv sync --dev
 script:
-    - flake8
-    - find . -type f -name '*.sh' | xargs shellcheck
+- flake8
+- find . -type f -name '*.sh' | xargs shellcheck
+notifications:
+  slack:
+    secure: f2G7OFq6FftUu3Zq/v/7ZUDLgWml4Z8mbTd5ZgzG0aAKvOqGI0Uaf/YXV7iIVacMZlM/sf1Q0NJyBvTRldGbCxhzknAY5szA/PQaY8Lk8xOmAMwdCqIjP1iTJh2YubnwCLg5gLYLUKH1dY5WMFjXR/hsNwvHYUl4etlpEIVloRZWlKI3//MOIyzW7xIYVmmoBhcj77Ck8MhCxYC7PVP3HS9qFmx0wjWf5HkEyJF9JCx4ciYUEa5CDL6m/BKByvxT/3E/cUFoHXfcMsJ2Tchv3SSNLX5SIT77msOGpHYRZmNf/0W96H5lKN5o/wmvo4ENGX5m3S/jmcvbtnrn1A+54Gg4Rq8GU8UbTTALu9qsJkp+N43lUzi+o90g/h7ie4dhaOPcm2JM4R5SHdEm//Yq3xoKNbgjJlnO7uzfHMKiDXVqjsK//15ifzCQk+7SfQNW6k06DhV1Oh4rH2mZeCxG7x4yGJlPwVYNgRRtC7Mb5EDwdXEMHpg3rWl5O5cD5snuDi7rI0GP+lBV/S/wGJv3Qpf0aXE5in4wNmO3L1y8Q0JVIyaJwSP6TmKEy1MZ0xUDp6ul5qQzwXdbcI081cbu3Z+kLlJM+y+tx6YezYtX4yMehV9t1RRH6grm1QNx53At9ZmWyLpnxsaW6IN++O8cGxgWrLqygAwW+uE0+8+JuXo=
