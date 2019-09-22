@@ -2,7 +2,8 @@ import os
 import shutil
 
 
-TEMPLATES_FOLDER = 'templates/code'
+AUX_TEMPLATES_FOLDER = 'templates/aux'
+CODE_TEMPLATES_FOLDER = 'templates/code'
 
 
 def generate_folder_structure(contest, problems):
@@ -21,10 +22,11 @@ def generate_test_files(contest, problems):
                 test_out.write(test['output'])
 
 
-def copy_code_templates(platform, contest, problems):
-    for problem_name, problem_tests in problems.items():
-        base_path = os.path.join(str(contest), problem_name)
-        templates_path = os.path.join(platform, TEMPLATES_FOLDER)
-        for filename in os.listdir(templates_path):
-            full_filename = os.path.join(templates_path, filename)
-            shutil.copy(full_filename, base_path)
+def copy_templates(platform, contest, problems):
+    for directory in [AUX_TEMPLATES_FOLDER, CODE_TEMPLATES_FOLDER]:
+        for problem_name, problem_tests in problems.items():
+            base_path = os.path.join(str(contest), problem_name)
+            templates_path = os.path.join(platform, directory)
+            for filename in os.listdir(templates_path):
+                full_filename = os.path.join(templates_path, filename)
+                shutil.copy(full_filename, base_path)

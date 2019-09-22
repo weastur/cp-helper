@@ -6,7 +6,7 @@ from codeforces.parser import parse
 from utils.generators import (
     generate_folder_structure,
     generate_test_files,
-    copy_code_templates,
+    copy_templates,
 )
 
 
@@ -35,7 +35,7 @@ def main():
         problems = parse(args.contest)
     generate_folder_structure(args.contest, problems)
     generate_test_files(args.contest, problems)
-    copy_code_templates(args.platform, args.contest, problems)
+    copy_templates(args.platform, args.contest, problems)
 
 
 if __name__ == '__main__':
