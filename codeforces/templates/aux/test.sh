@@ -16,21 +16,21 @@ while getopts ":p" opt; do
 done
 
 if ! $is_python ; then
-    gcc -static -fno-asm -lm -s -std=c11 -m32 -Wall -Wextra -Wpedantic -O2 ./*.c
-    RUN_CMD="$(command -v time) -o time.out -f '(%es)' ./a.out"
+    gcc -static -fno-asm -lm -s -std=c11 -m32 -Wall -Wextra -Wpedantic -Wno-unused-result -O2 ./*.c
+    RUN_CMD="command -p time -o time.out -f '(%es)' ./a.out"
 else
-    RUN_CMD="$(command -v time) -o time.out -f '(%es)' python3 ./*.py"
+    RUN_CMD="command -p time -o time.out -f '(%es)' python3 ./*.py"
 fi
 
 test_count="$(find . -type f -name '*.in' | wc -l)"
 for test_case in $(seq "${test_count}")
 do
     input_testcase="${test_case}.in"
-    output_testcase="${test_case}.in"
+    output_testcase="${test_case}.out"
     my_output="${test_case}_my.out"
     if ! bash -c "${RUN_CMD}" < "${input_testcase}" > "${my_output}"; then
         echo "[1m[31mSample test #${test_case}: Runtime Error[0m $(cat time.out)"
-        echo "========================================"
+        echo -e "\n========================================"
         echo "Sample Input \#${test_case}"
         cat "${input_testcase}"
     else
@@ -38,10 +38,10 @@ do
             echo "[1m[32mSample test #${test_case}: Accepted[0m $(cat time.out)"
         else
             echo "[1m[31mSample test #${test_case}: Wrong Answer[0m $(cat time.out)"
-            echo "========================================"
+            echo -e "\n========================================"
             echo "Sample Input #${test_case}"
             cat "${input_testcase}"
-            echo "========================================"
+            echo -e "\n========================================"
             echo "Sample Output #${test_case}"
             cat "${output_testcase}"
             echo "========================================"
