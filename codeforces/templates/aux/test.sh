@@ -16,10 +16,10 @@ while getopts ":p" opt; do
 done
 
 if ! $is_python ; then
-    gcc -static -fno-asm -lm -s -std=c11 -m32 -Wall -Wno-unused-result -O2 ./*.c
-    RUN_CMD="command -p time -o time.out -f '(%es)' ./a.out"
+    gcc -fno-asm -lm -std=c11 -Wall -Wno-unused-result -O2 ./*.c
+    RUN_CMD="gtime -o time.out -f '(%es)' ./a.out"
 else
-    RUN_CMD="command -p time -o time.out -f '(%es)' pypy3 ./*.py"
+    RUN_CMD="gtime -o time.out -f '(%es)' pypy3 ./*.py"
 fi
 
 test_count="$(find . -type f -name '*.in' | wc -l)"
